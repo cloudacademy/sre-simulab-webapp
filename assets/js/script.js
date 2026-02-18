@@ -3,8 +3,6 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-console.log("Application JavaScript loaded successfully.");
-document.body.insertAdjacentHTML("beforeend","<p style='color: green;'>JavaScript loaded correctly.</p>");
 
 (function($) {
 
@@ -409,3 +407,142 @@ document.body.insertAdjacentHTML("beforeend","<p style='color: green;'>JavaScrip
 	});
 
 })(jQuery);
+
+
+/* --- SimuLab SRE additions: Feedback widget + status banner --- */
+(function () {
+  "use strict";
+
+  function rid() {
+    // Short, readable request id; good enough for demo correlation
+    return (
+      "REQ-" +
+      Math.random().toString(16).slice(2, 10).toUpperCase() +
+      "-" +
+      Date.now().toString(36).toUpperCase()
+    );
+  }
+
+  function buildDiagnostics() {
+    return {
+      ts: new Date().toISOString(),
+      page: location.pathname + location.hash,
+      ref: document.referrer || null,
+      ua: navigator.userAgent,
+      lang: navigator.language,
+      viewport: { w: window.innerWidth, h: window.innerHeight },
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone
+    };
+  }
+
+  function setBannerFromQueryOrStorage() {
+    const banner = document.getElementById("statusBanner");
+    const badge = document.getElementById("statusBadge");
+    const text = document.getElementById("statusText");
+    if (!banner || !badge || !text) return;
+
+    const params = new URLSearchParams(location.search);
+    // demo-only: ?status=degraded|operational
+    const forced = params.get("status");
+    const stored = localStorage.getItem("demo_status");
+    const mode = forced || stored || "operational";
+
+    banner.hidden = false;
+
+    if (mode === "degraded") {
+      badge.textContent = "Degraded";
+      badge.classList.add("badge--warn");
+      text.textContent =
+        "We’re investigating increased error rates on feedback submissions.";
+    } else {
+      badge.textContent = "Operational";
+      badge.classList.remove("badge--warn");
+      text.textContent = "All systems normal.";
+    }
+
+    // Persist if forced via URL
+    if (forced) localStorage.setItem("demo_status", forced);
+  }
+
+  async function submitFeedback(form) {
+    const requestId = rid();
+
+    const requestIdInput = document.getElementById("requestId");
+    const diagnosticsInput = document.getElementById("diagnostics");
+    const includeDiag = document.getElementById("includeDiagnostics");
+
+    if (requestIdInput) requestIdInput.value = requestId;
+
+    const bundle = { requestId };
+
+    if (includeDiag && includeDiag.checked) {
+      const diag = buildDiagnostics();
+      bundle.diagnostics = diag;
+      if (diagnosticsInput) diagnosticsInput.value = JSON.stringify(diag);
+    } else {
+      if (diagnosticsInput) diagnosticsInput.value = "";
+    }
+
+    // Build x-www-form-urlencoded payload from form fields
+    const body = new URLSearchParams(new FormData(form));
+
+    let ok = false;
+    let status = 0;
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body
+      });
+      ok = res.ok;
+      status = res.status;
+    } catch (e) {
+      // Network/endpoint errors are fine in a static demo;
+      // we still present a reference id so the UI feels real
+      bundle.error = "network_error";
+    }
+
+    // Render confirmation panel
+    const panel = document.getElementById("feedbackResult");
+    const ridEl = document.getElementById("feedbackRequestId");
+    const pre = document.getElementById("debugBundle");
+    const copyBtn = document.getElementById("copyBundleBtn");
+
+    bundle.http = { ok, status };
+
+    if (ridEl) ridEl.textContent = requestId;
+    if (pre) pre.textContent = JSON.stringify(bundle, null, 2);
+    if (panel) panel.hidden = false;
+
+    if (copyBtn && pre) {
+      copyBtn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(pre.textContent || "");
+          copyBtn.textContent = "Copied";
+          setTimeout(() => (copyBtn.textContent = "Copy debug bundle"), 1200);
+        } catch {
+          copyBtn.textContent = "Copy failed";
+          setTimeout(() => (copyBtn.textContent = "Copy debug bundle"), 1200);
+        }
+      };
+    }
+  }
+
+  function initFeedbackForm() {
+    const form = document.getElementById("feedbackForm");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      submitFeedback(form);
+    });
+  }
+
+  window.addEventListener("load", () => {
+    setBannerFromQueryOrStorage();
+    initFeedbackForm();
+  });
+})();
