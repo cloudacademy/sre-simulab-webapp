@@ -490,7 +490,8 @@
     let status = 0;
 
     try {
-      const res = await fetch(form.action, {
+      const endpoint = "/api/feedback";
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
