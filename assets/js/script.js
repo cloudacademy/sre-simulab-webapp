@@ -511,11 +511,25 @@
     const pre = document.getElementById("debugBundle");
     const copyBtn = document.getElementById("copyBundleBtn");
 
-    bundle.http = { ok, status };
+  bundle.http = { ok, status };
 
-    if (ridEl) ridEl.textContent = requestId;
-    if (pre) pre.textContent = JSON.stringify(bundle, null, 2);
-    if (panel) panel.hidden = false;
+  if (status === 403) {
+    bundle.error = "blocked_by_waf";
+  }
+
+  if (ridEl) ridEl.textContent = requestId;
+  if (pre) pre.textContent = JSON.stringify(bundle, null, 2);
+
+  // Optional: if you have status text elements, set them; otherwise the JSON shows it
+  const statusLine = document.getElementById("feedbackStatusLine");
+  if (statusLine) {
+    if (status === 403) statusLine.textContent = "Forbidden";
+    else if (ok) statusLine.textContent = "Submitted successfully.";
+    else statusLine.textContent = `Submission failed (HTTP ${status || "unknown"}).`;
+  }
+
+  if (panel) panel.hidden = false;
+
 
     if (copyBtn && pre) {
       copyBtn.onclick = async () => {
@@ -532,14 +546,49 @@
   }
 
   function initFeedbackForm() {
-    const form = document.getElementById("feedbackForm");
+    // Support both:
+    // - our newer form id="feedbackForm"
+    // - the stock HTML5UP contact form inside article#contact
+    const form =
+      document.getElementById("feedbackForm") ||
+      document.querySelector("article#contact form") ||
+      document.querySelector("form#contactForm");
+
     if (!form) return;
+
+    // Ensure action is a real endpoint (avoid POSTing to "/" or same-page "#contact")
+    // If action is missing, "#", empty, or points to the current page, force /api/feedback.
+    const normalizeAction = () => {
+      const raw = (form.getAttribute("action") || "").trim();
+
+      // Treat these as "not a real endpoint"
+      if (raw === "" || raw === "#" || raw === location.href || raw === location.pathname) {
+        form.action = "/api/feedback";
+        return;
+      }
+
+      // If someone set action="/#contact" or similar, strip hash by forcing endpoint
+      if (raw.includes("#")) {
+        form.action = "/api/feedback";
+        return;
+      }
+
+      // If action is relative without a leading slash (e.g. "feedback"), normalize it
+      if (!raw.startsWith("http") && !raw.startsWith("/")) {
+        form.action = "/" + raw;
+        return;
+      }
+    };
+
+    normalizeAction();
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      normalizeAction(); // re-check in case the DOM changes
       submitFeedback(form);
     });
   }
+
 
   window.addEventListener("load", () => {
     setBannerFromQueryOrStorage();
