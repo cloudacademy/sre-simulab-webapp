@@ -15,126 +15,121 @@
 	</head>
 	<body>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<div id="statusBanner" class="banner" hidden>
-				<div class="banner__left">
-					<span id="statusBadge" class="badge">Operational</span>
-					<span id="statusText" class="banner__text">All systems normal.</span>
-				</div>
-				<div class="banner__right">
-					<span class="meta">Region: <span id="metaRegion">us-east-1</span></span>
-					<span class="meta">Build: <span id="metaBuild">web-1.4.2</span></span>
-				</div>
-				</div>
-
 				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-diamond"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>Support</h1>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#contact">Contact</a></li>
-								<li><a href="#status">Status (internal)</a></li>
-								<li><a href="#changelog">Changelog (internal)</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
-
-				<!-- Main -->
-					<div id="main">
-
-							<article id="contact">
-							<h2 class="major">Send Feedback</h2>
-							<p class="muted">
-								Found an issue or have a suggestion? Send it here. If you saw an error, paste the message or logs below.
-							</p>
-
-							<form id="feedbackForm" action="/api/feedback" method="post" novalidate>
-								<div class="field half first">
-								<label for="category">Category</label>
-								<div class="select-wrapper">
-									<select id="category" name="category" required>
-									<option value="bug">Bug</option>
-									<option value="feedback">Product feedback</option>
-									<option value="billing">Billing</option>
-									<option value="other">Other</option>
-									</select>
-								</div>
-								</div>
-
-								<div class="field half">
-								<label for="email">Email (optional)</label>
-								<input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" />
-								</div>
-
-								<div class="field">
-								<label for="subject">Subject</label>
-								<input id="subject" name="subject" type="text" required maxlength="120" placeholder="Short summary" />
-								</div>
-
-								<div class="field">
-								<label for="message">Message</label>
-								<textarea id="message" name="message" rows="4" required maxlength="2000"
-									placeholder="What happened? What were you trying to do?"></textarea>
-								</div>
-
-								<div class="field">
-								<label for="details">Details / logs (optional)</label>
-								<textarea id="details" name="details" rows="6" maxlength="8000"
-									placeholder="Paste any error output, console messages, or steps to reproduce."></textarea>
-								</div>
-
-								<div class="field">
-								<input type="checkbox" id="includeDiagnostics" name="includeDiagnostics" checked />
-								<label for="includeDiagnostics">Include browser + page diagnostics</label>
-								</div>
-
-								<!-- populated by JS if diagnostics enabled -->
-								<input type="hidden" id="diagnostics" name="diagnostics" value="" />
-								<input type="hidden" id="requestId" name="requestId" value="" />
-
-								<ul class="actions">
-								<li><button type="submit" class="special">Submit feedback</button></li>
-								<li><button type="reset">Reset</button></li>
-								</ul>
-							</form>
-
-							<div id="feedbackResult" class="panel" aria-live="polite" hidden>
-								<h3>Thanks — we received your feedback</h3>
-								<p class="muted" id="feedbackStatusLine"></p>
-								<p class="muted">
-								Reference ID: <span class="mono" id="feedbackRequestId"></span>
-								<button class="small" id="copyBundleBtn" type="button">Copy debug bundle</button>
-								</p>
-								<pre class="code" id="debugBundle"></pre>
-							</div>
-							</article>
-
-						<!-- status -->
-							<article id="status">
-								<h2 class="major">Status (internal)</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#changelog">awesome work</a>.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-							</article>
-
-						<!-- changelog -->
-							<article id="changelog">
-								<h2 class="major">Changelog (internal)</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							</article>
+				<header id="header">
+					<div class="logo">
+						<span class="icon fa-wrench"></span>
 					</div>
-			</div>
+					<div class="content">
+						<div class="inner">
+							<h1>Support</h1>
+						</div>
+					<div id="statusBanner" class="banner" hidden>
+						<div class="banner__left">
+							<span id="statusBadge" class="badge">Operational</span>
+							<span id="statusText" class="banner__text">All systems normal.</span>
+						</div>
+						<div class="banner__right">
+							<span class="meta">Region: <span id="metaRegion">us-east-1</span></span>
+							<span class="meta">Build: <span id="metaBuild">web-1.4.2</span></span>
+						</div>
+					</div>
+					</div>
+					<nav>
+						<ul>
+							<li><a href="#contact">Submit Feedback</a></li>
+							<li><a href="#status">Status (internal)</a></li>
+							<li><a href="#changelog">Changelog (internal)</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<div id="main">
+
+						<article id="contact">
+						<h2 class="major">Send Feedback</h2>
+						<p class="muted">
+							Found an issue or have a suggestion? Send it here. If you saw an error, paste the message or logs below.
+						</p>
+
+						<form id="feedbackForm" action="/api/feedback" method="post" novalidate>
+							<div class="field half first">
+							<label for="category">Category</label>
+							<div class="select-wrapper">
+								<select id="category" name="category" required>
+								<option value="bug">Bug</option>
+								<option value="feedback">Product feedback</option>
+								<option value="billing">Billing</option>
+								<option value="other">Other</option>
+								</select>
+							</div>
+							</div>
+
+							<div class="field half">
+							<label for="email">Email (optional)</label>
+							<input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" />
+							</div>
+
+							<div class="field">
+							<label for="subject">Subject</label>
+							<input id="subject" name="subject" type="text" required maxlength="120" placeholder="Short summary" />
+							</div>
+
+							<div class="field">
+							<label for="message">Message</label>
+							<textarea id="message" name="message" rows="4" required maxlength="2000"
+								placeholder="What happened? What were you trying to do?"></textarea>
+							</div>
+
+							<div class="field">
+							<label for="details">Details / logs (optional)</label>
+							<textarea id="details" name="details" rows="6" maxlength="8000"
+								placeholder="Paste any error output, console messages, or steps to reproduce."></textarea>
+							</div>
+
+							<div class="field">
+							<input type="checkbox" id="includeDiagnostics" name="includeDiagnostics" checked />
+							<label for="includeDiagnostics">Include browser + page diagnostics</label>
+							</div>
+
+							<!-- populated by JS if diagnostics enabled -->
+							<input type="hidden" id="diagnostics" name="diagnostics" value="" />
+							<input type="hidden" id="requestId" name="requestId" value="" />
+
+							<ul class="actions">
+							<li><button type="submit" class="special">Submit feedback</button></li>
+							<li><button type="reset">Reset</button></li>
+							</ul>
+						</form>
+
+						<div id="feedbackResult" class="panel" aria-live="polite" hidden>
+							<h3>Thanks — we received your feedback</h3>
+							<p class="muted" id="feedbackStatusLine"></p>
+							<p class="muted">
+							Reference ID: <span class="mono" id="feedbackRequestId"></span>
+							<button class="small" id="copyBundleBtn" type="button">Copy debug bundle</button>
+							</p>
+							<pre class="code" id="debugBundle"></pre>
+						</div>
+						</article>
+
+					<!-- status -->
+						<article id="status">
+							<h2 class="major">Status (internal)</h2>
+							<span class="image main"></span>
+							<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#changelog">awesome work</a>.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+						</article>
+
+					<!-- changelog -->
+						<article id="changelog">
+							<h2 class="major">Changelog (internal)</h2>
+							<span class="image main"></span>
+							<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
+							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+						</article>
+				</div>
 
 		<!-- BG -->
 			<div id="bg"></div>
