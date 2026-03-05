@@ -30,16 +30,16 @@
 							<span id="statusText" class="banner__text">All systems normal.</span>
 						</div>
 						<div class="banner__right">
-							<span class="meta">Region: <span id="metaRegion">us-east-1</span></span>
-							<span class="meta">Build: <span id="metaBuild">web-1.4.2</span></span>
+							<span class="meta">Region: <span id="metaRegion">us-west-2</span></span>
+							<span class="meta">Environment: <span id="metaBuild">staging-web-1.4.2</span></span>
 						</div>
 					</div>
 					</div>
 					<nav>
 						<ul>
-							<li><a href="#contact">Submit Feedback</a></li>
-							<li><a href="#status">Status (internal)</a></li>
-							<li><a href="#changelog">Changelog (internal)</a></li>
+							<li><a href="#contact">Feedback</a></li>
+							<!-- <li><a href="#status">Status (internal)</a></li> -->
+							<li><a href="#changelog">Changelog</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -115,19 +115,88 @@
 						</article>
 
 					<!-- status -->
-						<article id="status">
+						<!-- <article id="status">
 							<h2 class="major">Status (internal)</h2>
 							<span class="image main"></span>
 							<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#changelog">awesome work</a>.</p>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-						</article>
+						</article> -->
 
 					<!-- changelog -->
 						<article id="changelog">
-							<h2 class="major">Changelog (internal)</h2>
+							<h2 class="major">Changelog</h2>
 							<span class="image main"></span>
-							<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+							<table class="changelog">
+								<thead>
+									<tr>
+									<th>Type</th>
+									<th>Timestamp</th>
+									<th>Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+									<td>Security</td>
+									<td>2026-02-18 14:02 UTC</td>
+									<td>WAF Security Rule injection_keywords_rule configured. Set to BLOCK.</td>
+									</tr>
+									<tr>
+									<td>UI</td>
+									<td>2026-02-18 13:31 UTC</td>
+									<td>Refreshed global navigation styling and updated footer links across public pages.</td>
+									</tr>
+									<tr>
+									<td>API</td>
+									<td>2026-02-18 13:07 UTC</td>
+									<td>Adjusted request timeout defaults and expanded retry telemetry for upstream calls.</td>
+									</tr>
+									<tr>
+									<td>Security</td>
+									<td>2026-02-18 11:52 UTC</td>
+									<td>WAF Security Rule block-internal-reporting-path configured. Upgraded to BLOCK.</td>
+									</tr>
+									<tr>
+									<td>UI</td>
+									<td>2026-02-18 11:26 UTC</td>
+									<td>Updated typography scale and standardized spacing tokens in the shared design system.</td>
+									</tr>
+									<tr>
+									<td>Security</td>
+									<td>2026-02-18 11:03 UTC</td>
+									<td>WAF Security Rule block-internal-reporting-path configured. Set to COUNT.</td>
+									</tr>
+									<tr>
+									<td>API</td>
+									<td>2026-02-18 10:12 UTC</td>
+									<td>Rolled out minor schema documentation updates and regenerated client SDK artifacts.</td>
+									</tr>
+									<tr>
+									<td>Security</td>
+									<td>2026-02-18 09:41 UTC</td>
+									<td>WAF Security Rule xss_querystring_rule_unused_path configured. Upgraded to BLOCK.</td>
+									</tr>
+									<tr>
+									<td>UI</td>
+									<td>2026-02-18 09:23 UTC</td>
+									<td>Improved accessibility contrast on shared components and updated icon sizing rules.</td>
+									</tr>
+									<tr>
+									<td>Security</td>
+									<td>2026-02-18 09:05 UTC</td>
+									<td>WAF Security Rule xss_querystring_rule_unused_path configured. Set to COUNT.</td>
+									</tr>
+									<tr>
+									<td>API</td>
+									<td>2026-02-18 08:38 UTC</td>
+									<td>Enabled additional request tracing fields for internal analytics aggregation.</td>
+									</tr>
+									<tr>
+									<td>UI</td>
+									<td>2026-02-18 08:12 UTC</td>
+									<td>Updated site-wide messaging templates and refreshed the default email footer branding.</td>
+									</tr>
+								</tbody>
+							</table>
 						</article>
 				</div>
 
